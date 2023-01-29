@@ -25,7 +25,13 @@ if uploaded_file is not None:
             st.dataframe(df)
         
         with analysis_tab:
-            # df = uf.clean_date_time(df)
+            start_date = df['date'].iloc[0]
+            start_time = df['time'].iloc[0]
+            end_date = df['date'].iloc[-1]
+            end_time = df['time'].iloc[-1]
+
+            df = uf.clean_date_time(df)
+
             tab1, tab2, tab3 = st.tabs(
                 [
                     'Overview', 
@@ -36,9 +42,11 @@ if uploaded_file is not None:
 
             with tab1:
                 st.write(
-                    f"The messages started on {df['date'].iloc[0]} by {df['time'].iloc[0]} and "
-                    f"ended on {df['date'].iloc[-1]} by {df['time'].iloc[-1]}"
+                    f"The conversation started on {start_date} by {start_time} and "
+                    f"ended on {end_date} by {end_time},"
+                    f"lasting for {start_date-end_date} days"
                 )
+                
                 
                 
     
