@@ -1,7 +1,7 @@
 import streamlit as st
 import utils_file as uf
-from io import StringIO
-import matplotlib.pyplot as plt
+# from io import StringIO
+# import matplotlib.pyplot as plt
 import random
 
 
@@ -53,7 +53,7 @@ if uploaded_file is not None:
                 x = [i for i in range(10)]
                 y = [random.randint(0, 100) for i in range(10)]
                 st.bar_chart(y, x=x, height=400)
-                authors = uf.authors_chat_count(df)
+                authors = uf.authors_chat_count(df).index
                 st.write(authors)
                 st.bar_chart(y=authors.values, x=authors.index)
                 
