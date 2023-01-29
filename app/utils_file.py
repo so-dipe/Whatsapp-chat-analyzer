@@ -2,6 +2,7 @@ import re
 import pandas as pd
 import calmap
 from wordcloud import WordCloud
+import plotly.express as px
 
 def check_txt_file(file):
     df = txt_to_dataframe(file)
