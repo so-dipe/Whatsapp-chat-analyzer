@@ -1,7 +1,7 @@
 import streamlit as st
 import utils_file as uf
 # from io import StringIO
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import random
 
 
@@ -52,7 +52,9 @@ if uploaded_file is not None:
                 )
                 authors = uf.authors_chat_count(df)
                 st.write(authors)
-                st.bar_chart(authors, x='author')
+                fig, ax = plt.subplots()
+                authors.plot(kind='barh', ax=ax)
+                st.pyplot(fig)
                 
 
             
