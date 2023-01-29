@@ -58,7 +58,7 @@ if uploaded_file is not None:
                 authors.index = new_index
                 st.write(authors.index)
                 st.write(authors)
-                fig = px.bar(authors, orientation='h')
+                fig = px.bar(authors, x=authors.index, orientation='h')
                 st.plotly_chart(fig)
                 
             
