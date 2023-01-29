@@ -26,9 +26,15 @@ if uploaded_file is not None:
         
         with analysis_tab:
             df = uf.clean_date_time(df)
-            overview_tab = st.tabs(['Overview'])
+            tab1, tab2, tab3 = st.tabs(
+                [
+                    'Overview', 
+                    'Participants', 
+                    'Word Cloud'
+                ]
+            )
 
-            with overview_tab:
+            with tab1:
                 # st.write(
                 #     f"The messages started on {df['date'][0]} by {df['time'][0]} and "
                 #     f"ended on {df['date'][-1]} by {df['time'][-1]}"
