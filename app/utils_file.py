@@ -105,7 +105,7 @@ def build_word_cloud(text_column, max_words):
     return wordcloud
 
 def authors_chat_count(df, top_ten=True):
-    chat_count = df['authors'].value_counts()
+    chat_count = df['author'].value_counts()
     if top_ten == True:
         return chat_count.sort_values().tail(10)
     else:
