@@ -1,6 +1,9 @@
 import streamlit as st
 import utils_file as uf
 from io import StringIO
+import matplotlib.pyplot as plt
+import random
+
 
 # Add a title to the app
 st.title("WhatsApp Chat Analyzer")
