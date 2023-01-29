@@ -52,7 +52,7 @@ if uploaded_file is not None:
                 )
                 authors = uf.authors_chat_count(df)
                 st.write(authors)
-                st.bar_chart(authors)
+                st.bar_chart(authors, x='author')
                 
 
             
