@@ -54,7 +54,7 @@ if uploaded_file is not None:
                 st.write(authors)
                 fig, ax = plt.subplots()
                 authors['author'].plot(kind='barh', ax=ax)
-                st.bar_chart(data=authors)
+                st.bar_chart(data=authors, orientation='horizontal')
                 
             
             with tab2:
