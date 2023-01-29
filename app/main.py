@@ -25,7 +25,7 @@ if uploaded_file is not None:
             st.dataframe(df)
         
         with analysis_tab:
-            df = uf.clean_date_time(df)
+            # df = uf.clean_date_time(df)
             tab1, tab2, tab3 = st.tabs(
                 [
                     'Overview', 
@@ -35,10 +35,10 @@ if uploaded_file is not None:
             )
 
             with tab1:
-                # st.write(
-                #     f"The messages started on {df['date'][0]} by {df['time'][0]} and "
-                #     f"ended on {df['date'][-1]} by {df['time'][-1]}"
-                # )
-                st.write(f"{df['date'][0].date}")
+                st.write(
+                    f"The messages started on {df['date'][0]} by {df['time'][0]} and "
+                    f"ended on {df['date'][-1]} by {df['time'][-1]}"
+                )
+                
                 
     
