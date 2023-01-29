@@ -53,7 +53,7 @@ if uploaded_file is not None:
                 authors = uf.authors_chat_count(df)
                 st.write(authors)
                 fig, ax = plt.subplots()
-                authors.plot(kind='barh', ax=ax)
+                authors['author'].plot(kind='barh', ax=ax)
                 st.pyplot(fig)
                 
 
