@@ -51,6 +51,7 @@ if uploaded_file is not None:
                     f"lasting **{(df['date'].iloc[-1]-df['date'].iloc[0]).days}** days."
                 )
                 authors = uf.authors_chat_count(df)
+                st.write(authors)
                 fig = px.bar(authors, orientation='h')
                 st.plotly_chart(fig)
                 
