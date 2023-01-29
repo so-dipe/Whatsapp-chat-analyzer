@@ -136,6 +136,6 @@ def plot_chat_count(chat_count):
     )
     if len(new_index) > 10:
         fig.update_layout(
-            height=len(new_index) * 100,
+            height=len(new_index) * 10,
         )
     return fig
