@@ -2,7 +2,7 @@ import streamlit as st
 import utils_file as uf
 # from io import StringIO
 import matplotlib.pyplot as plt
-import random
+import plotly.express as px
 
 
 # Add a title to the app
@@ -52,9 +52,8 @@ if uploaded_file is not None:
                 )
                 authors = uf.authors_chat_count(df)
                 st.write(authors)
-                fig, ax = plt.subplots()
-                authors['author'].plot(kind='barh', ax=ax)
-                st.bar_chart(data=authors, orientation='horizontal')
+                fig = px.bar(df, orientation='h')
+                st.plotly_chart(data=authors)
                 
             
             with tab2:
