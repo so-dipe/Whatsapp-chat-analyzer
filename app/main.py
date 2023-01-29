@@ -56,7 +56,6 @@ if uploaded_file is not None:
                 authors['author'].plot(kind='barh', ax=ax)
                 st.bar_chart(data=authors)
                 
-
             
             with tab2:
                 pass
