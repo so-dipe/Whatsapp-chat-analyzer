@@ -16,5 +16,14 @@ if uploaded_file is not None:
     st.write("File Uploaded")
     contents = uploaded_file.read().decode("utf-8")
     df = uf.check_txt_file(contents)
-    st.write(df.head())
+    if type(df) is str:
+        st.write(df)
+    else:
+        analysis_tab, data_tab = st.tabs(['Analysis', 'Data'])
+
+        with data_tab:
+            st.dataframe(df)
+        
+        with analysis_tab:
+            st.write('Analysis Begins Here')
     
