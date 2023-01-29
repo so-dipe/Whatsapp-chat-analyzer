@@ -53,7 +53,7 @@ if uploaded_file is not None:
                 authors = uf.authors_chat_count(df)
                 st.write(authors.index)
 
-                fig = px.bar(authors, y=authors.index, orientation='h')
+                fig = px.bar(authors, orientation='h')
                 st.plotly_chart(fig)
                 
             
