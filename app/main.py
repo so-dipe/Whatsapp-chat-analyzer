@@ -12,3 +12,4 @@ uploaded_file = st.file_uploader("Uplaod your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
     st.write("File Uploaded")
+    print(type(uploaded_file))
