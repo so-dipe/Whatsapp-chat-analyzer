@@ -33,5 +33,5 @@ if uploaded_file is not None:
                 #     f"The messages started on {df['date'][0]} by {df['time'][0]} and "
                 #     f"ended on {df['date'][-1]} by {df['time'][-1]}"
                 # )
-                st.write(df['date'][0])
+                st.write(df['date'])
     
