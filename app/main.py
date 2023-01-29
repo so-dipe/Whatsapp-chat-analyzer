@@ -64,7 +64,6 @@ if uploaded_file is not None:
                 fig = uf.plot_chat_count(authors)
                                     
                 st.plotly_chart(fig)
-
                 if len(authors) > 10:
                     st.write(
                         'You can check the activity of all members in Participants'
