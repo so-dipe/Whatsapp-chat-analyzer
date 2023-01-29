@@ -53,13 +53,13 @@ if uploaded_file is not None:
                 authors = uf.authors_chat_count(df)
                 if len(authors) > 10:
                     st.write(
-                        f'The conversation has **{len(authors)}** participants'
+                        f'The conversation has **{len(authors)}** participants '
                         'and below are the top 10 most active members.'
                     )
                 else:
                     st.write(
-                        f'The conversation has **{len(authors)}** participants'
-                        'and below is the activity of all it\' members'
+                        f'The conversation has **{len(authors)}** participants '
+                        'and below is the activity of all  members'
                     )
                 fig = uf.plot_chat_count(authors)
                                     
@@ -74,6 +74,7 @@ if uploaded_file is not None:
             with tab2:
                 authors = uf.authors_chat_count(df, False)
                 fig = uf.plot_chat_count(authors)
+                st.plotly_chart(fig)
 
                 
                 
