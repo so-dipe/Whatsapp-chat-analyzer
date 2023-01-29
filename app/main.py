@@ -25,5 +25,12 @@ if uploaded_file is not None:
             st.dataframe(df)
         
         with analysis_tab:
-            st.write('Analysis Begins Here')
+            df = clean_date_time(df)
+            overview_tab = st.tabs(['Overview'])
+
+            with overview_tab:
+                st.write(
+                    f"The messages started on {df['date'][0]} by {df['time'][0]} and "
+                    f"ended on {df['date'][-1]} by {df['time'][-1]}"
+                )
     

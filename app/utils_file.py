@@ -103,3 +103,4 @@ def build_word_cloud(text_column, max_words):
     wordcloud = WordCloud(width=800, height=400, max_words=max_words).generate(' '.join(text_column))
 
     return wordcloud
+
