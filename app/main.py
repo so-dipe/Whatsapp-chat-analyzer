@@ -13,6 +13,7 @@ uploaded_file = st.file_uploader("Uplaod your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
     st.write("File Uploaded")
-    with open(uploaded_file) as f:
-        df = uf.check_txt_file(f)
-        st.write(df.head())
+    # with open(uploaded_file) as f:
+    #     df = uf.check_txt_file(f)
+    #     st.write(df.head())
+    st.write(type(uploaded_file))
