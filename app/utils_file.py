@@ -108,11 +108,11 @@ def authors_chat_count(df, top_ten=True):
     chat_count = df['author'].value_counts()
     if top_ten == True:
         try:
-            return chat_count.sort_values().tail(10).to_frame().drop(index='')
+            return chat_count.sort_values().tail(10).drop(index='')
         except:
-            return chat_count.sort_values().tail(10).to_frame()
+            return chat_count.sort_values().tail(10)
     else:
         try:
-            return chat_count.sort_values().to_frame().drop(index='')
+            return chat_count.sort_values().drop(index='')
         except:
-            return chat_count.sort_values().to_frame()
+            return chat_count.sort_values()
