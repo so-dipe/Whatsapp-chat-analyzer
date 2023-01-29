@@ -106,13 +106,14 @@ def build_word_cloud(text_column, max_words):
 
 def authors_chat_count(df, top_ten=True):
     chat_count = df['author'].value_counts()
+
     if top_ten == True:
         try:
-            return chat_count.sort_values().tail(10).drop(index='')
+            return chat_count.sort_values().tail(10).to_frame().drop(index='')
         except:
-            return chat_count.sort_values().tail(10)
+            return chat_count.sort_values().tail(10).to_frame()
     else:
         try:
-            return chat_count.sort_values().drop(index='')
+            return chat_count.sort_values().to_frame().drop(index='')
         except:
-            return chat_count.sort_values()
+            return chat_count.sort_values().to_frame()
