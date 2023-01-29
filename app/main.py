@@ -44,8 +44,8 @@ if uploaded_file is not None:
             with tab1:
                 st.write(
                     f"The conversation started on {start_date} by {start_time} and "
-                    f"ended on {end_date} by {end_time},"
-                    f"lasting for {(df['date'].iloc[0]-df['date'].iloc[-1]).days} days"
+                    f"ended on {end_date} by {end_time}, "
+                    f"lasting {(df['date'].iloc[-1]-df['date'].iloc[0]).days} days"
                 )
                 
                 
