@@ -60,7 +60,13 @@ if uploaded_file is not None:
                         new_index.append(index)
                 authors.index = new_index
                 fig = px.bar(authors, orientation='h')
-                fig.update_layout(xaxis_title="Message Count", yaxis_title="Author")
+                fig.update_layout(
+                    xaxis_title="Message Count",
+                    yaxis_title="Author",
+                    showlegend=False
+                )
+                 
+                                    
                 st.plotly_chart(fig)
                 
             
