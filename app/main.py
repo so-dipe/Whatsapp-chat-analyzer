@@ -25,7 +25,7 @@ if uploaded_file is not None:
             st.dataframe(df)
         
         with analysis_tab:
-            df = clean_date_time(df)
+            df = uf.clean_date_time(df)
             overview_tab = st.tabs(['Overview'])
 
             with overview_tab:
