@@ -126,11 +126,11 @@ def plot_chat_count(chat_count):
             new_index.append(index)
         else:
             new_index.append(index)
-            chat_count.index = new_index
-            fig = px.bar(chat_count, orientation='h')
-            fig.update_layout(
-                xaxis_title="Message Count",
-                yaxis_title="Author",
-                showlegend=False
-            )
+    chat_count.index = new_index
+    fig = px.bar(chat_count, orientation='h')
+    fig.update_layout(
+        xaxis_title="Message Count",
+        yaxis_title="Author",
+        showlegend=False
+    )
     return fig
