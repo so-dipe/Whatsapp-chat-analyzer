@@ -117,3 +117,20 @@ def authors_chat_count(df, top_ten=True):
             return chat_count.sort_values().to_frame().drop(index='')
         except:
             return chat_count.sort_values().to_frame()
+
+def plot_chat_count(chat_count):
+    new_index = []
+    for index in chat_count.index:
+        if index[0] == '+':
+            index = f'({index})'
+            new_index.append(index)
+        else:
+            new_index.append(index)
+            chat_count.index = new_index
+            fig = px.bar(chat_count, orientation='h')
+            fig.update_layout(
+                xaxis_title="Message Count",
+                yaxis_title="Author",
+                showlegend=False
+            )
+    return fig

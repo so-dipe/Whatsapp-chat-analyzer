@@ -51,20 +51,21 @@ if uploaded_file is not None:
                     f"lasting **{(df['date'].iloc[-1]-df['date'].iloc[0]).days}** days."
                 )
                 authors = uf.authors_chat_count(df)
-                new_index = []
-                for index in authors.index:
-                    if index[0] == '+':
-                        index = f'({index})'
-                        new_index.append(index)
-                    else:
-                        new_index.append(index)
-                authors.index = new_index
-                fig = px.bar(authors, orientation='h')
-                fig.update_layout(
-                    xaxis_title="Message Count",
-                    yaxis_title="Author",
-                    showlegend=False
-                )
+                # new_index = []
+                # for index in authors.index:
+                #     if index[0] == '+':
+                #         index = f'({index})'
+                #         new_index.append(index)
+                #     else:
+                #         new_index.append(index)
+                # authors.index = new_index
+                # fig = px.bar(authors, orientation='h')
+                # fig.update_layout(
+                #     xaxis_title="Message Count",
+                #     yaxis_title="Author",
+                #     showlegend=False
+                # )
+                fig = uf.plot_chat_count(authors)
                  
                                     
                 st.plotly_chart(fig)
