@@ -44,7 +44,7 @@ if uploaded_file is not None:
                 st.write(
                     f"The conversation started on {start_date} by {start_time} and "
                     f"ended on {end_date} by {end_time},"
-                    f"lasting for {start_date-end_date} days"
+                    f"lasting for {(start_date-end_date).days} days"
                 )
                 
                 
