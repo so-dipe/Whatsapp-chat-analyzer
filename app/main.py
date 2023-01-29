@@ -16,4 +16,4 @@ if uploaded_file is not None:
     # with open(uploaded_file) as f:
     #     df = uf.check_txt_file(f)
     #     st.write(df.head())
-    st.write(type(uploaded_file))
+    st.write(type(uploaded_file.read()))
