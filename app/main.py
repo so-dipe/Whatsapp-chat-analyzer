@@ -1,4 +1,5 @@
 import streamlit as st
+import utils_file as uf
 
 # Add a title to the app
 st.title("WhatsApp Chat Analyzer")
@@ -12,4 +13,5 @@ uploaded_file = st.file_uploader("Uplaod your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
     st.write("File Uploaded")
-    print(type(uploaded_file))
+    df = uf.check_text_file(uploaded_file)
+    st.write(df.head())
