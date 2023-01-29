@@ -32,6 +32,7 @@ if uploaded_file is not None:
 
             df = uf.clean_date_time(df)
 
+
             tab1, tab2, tab3 = st.tabs(
                 [
                     'Overview', 
@@ -44,7 +45,7 @@ if uploaded_file is not None:
                 st.write(
                     f"The conversation started on {start_date} by {start_time} and "
                     f"ended on {end_date} by {end_time},"
-                    f"lasting for {(start_date-end_date).days} days"
+                    f"lasting for {(df['date'].iloc[0]-df['date'].iloc[-1]).days} days"
                 )
                 
                 
