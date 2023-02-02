@@ -71,6 +71,7 @@ if uploaded_file is not None:
                     st.write(
                         'You can check the activity of all members in Participants'
                     )
+                    print('')
                     
                 
             with tab2:
