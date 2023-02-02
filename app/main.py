@@ -1,8 +1,13 @@
 import streamlit as st
-import utils_file as uf
-# from io import StringIO
-import matplotlib.pyplot as plt
-import plotly.express as px
+# import app.utils as uf
+# # from io import StringIO
+# import matplotlib.pyplot as plt
+# import plotly.express as px
+
+from chat_cleaner import WrangleChat
+from whatsapp_analyser import WhatsappAnalyser
+from visualise_data import VisualizeData
+
 
 
 # Add a title to the app
@@ -16,25 +21,23 @@ st.write("Welcome to the WhatsApp Chat app. This app visualizes your whatsapp ch
 uploaded_file = st.file_uploader("Uplaod your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
-    st.write("File Uploaded")
+    st.write("File Uploaded Successfully")
     contents = uploaded_file.read().decode("utf-8")
-    df = uf.check_txt_file(contents)
+    chat_wrangler = WrangleChat(contents)
+    df = chat_wrangler.chat_df
     if type(df) is str:
         st.write(df)
+        # st.write(contents)
     else:
+
         analysis_tab, data_tab = st.tabs(['Analysis', 'Data'])
 
         with data_tab:
             st.dataframe(df)
-        
+            
         with analysis_tab:
-            start_date = df['date'].iloc[0]
-            start_time = df['time'].iloc[0]
-            end_date = df['date'].iloc[-1]
-            end_time = df['time'].iloc[-1]
-
-            df = uf.clean_date_time(df)
-
+            wa_analysis = WhatsappAnalyser(df)
+            wa_visuals = VisualizeData(df)
 
             tab1, tab2, tab3 = st.tabs(
                 [
@@ -46,35 +49,34 @@ if uploaded_file is not None:
 
             with tab1:
                 st.write(
-                    f"The conversation started on **{start_date}** by **{start_time}** and "
-                    f"ended on **{end_date}** by **{end_time}**, "
-                    f"lasting **{(df['date'].iloc[-1]-df['date'].iloc[0]).days}** days."
+                    wa_analysis.first_last_day_text()
                 )
-                authors = uf.authors_chat_count(df)
-                if len(authors) > 10:
+                num_authors = len(wa_analysis.count_by_authors())
+                st.write(
+                    f'The conversation was between **{num_authors}** individuals.'
+                )
+
+                if num_authors > 10:
                     st.write(
-                        f'The conversation has **{len(authors)}** participants '
-                        'and below are the top 10 most active members.'
+                        f'Here are the top 10 contributors in this group:'
                     )
                 else:
                     st.write(
-                        f'The conversation has **{len(authors)}** participants '
-                        'and below is the activity of all  members'
+                        f'Here is the activity chart of all members'
                     )
-                fig = uf.plot_chat_count(authors)
-                                    
+                fig = wa_visuals.plot_chat_author_count()
+                                        
                 st.plotly_chart(fig)
-                if len(authors) > 10:
+                if num_authors > 10:
                     st.write(
                         'You can check the activity of all members in Participants'
                     )
+                    
                 
-            
             with tab2:
-                authors = uf.authors_chat_count(df, False)
-                fig = uf.plot_chat_count(authors)
+                fig = wa_visuals.plot_chat_author_count(False)
                 st.plotly_chart(fig)
 
-                
-                
-    
+                    
+                    
+        

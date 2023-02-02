@@ -71,7 +71,7 @@ def plot_calmap(daily_counts):
     fig.set_size_inches(18, 8)
     return fig
 
-def extract_emojis(text):
+def find_emojis(text):
     emoji_pattern = re.compile("["
         u"\U0001f600-\U0001f64f"  # emoticons
         u"\U0001f300-\U0001f5ff"  # symbols & pictographs
@@ -83,7 +83,7 @@ def extract_emojis(text):
     return emoji_pattern.findall(text)
 
 def get_emoji_value_counts(text_column):
-    emoji_series = text_column.apply(extract_emojis)
+    emoji_series = text_column.apply(find_emojis)
     emoji_list = []
     for i in emoji_series:
         if len(i) != 0:
@@ -139,3 +139,6 @@ def plot_chat_count(chat_count):
             height=len(new_index) * 10,
         )
     return fig
+
+def format_hour(hour):
+        return f"{hour}:00{'am' if hour < 12 else 'pm'}"
