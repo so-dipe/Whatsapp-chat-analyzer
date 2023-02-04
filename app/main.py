@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 # import app.utils as uf
 # # from io import StringIO
 # import matplotlib.pyplot as plt
@@ -45,7 +46,7 @@ if uploaded_file is not None:
                     'Participants',
                     'Activity (Hours)', 
                     'Activity (Days)',
-                    'Word Cloud'
+                    'Text Analysis'
                 ]
             )
 
@@ -105,10 +106,21 @@ if uploaded_file is not None:
                 pass
 
             with tab4: #Activity (days)
-                pass
+                st.write('')
+                st.plotly_chart(wa_visuals.plot_day_of_week_activity())
+                years_cal_plot = wa_visuals.plot_chat_calender()
+                st.pyplot(years_cal_plot)
+                
 
-            with tab5: #Word Cloud
-                pass
+            with tab5: #Text Analysis
+                st.write('Emoji Count')
+                st.plotly_chart(wa_visuals.plot_emojis())
+                with st.expander('View Full Emoji List'):
+                    st.plotly_chart(wa_visuals.plot_emojis(top_ten=False))
+
+                st.write('Word Cloud')
+                word_cloud = wa_visuals.plot_word_cloud()
+                st.pyplot(word_cloud)
 
                     
                     

@@ -11,6 +11,11 @@ class WhatsappAnalyser:
     date_counts = self.chat_df['date'].dt.date.value_counts()
     return date_counts.sort_index()
 
+  def top_ten_most_active_days(self):
+    data = self.count_daily().sort_values().tail(10)
+    data.index = data.index.astype(str)
+    return data
+
   def count_hourly(self, normalize=False):
     hour_counts = self.chat_df['time'].apply(lambda x: x.hour).value_counts(normalize=normalize)
     hour_counts = hour_counts.sort_index()
@@ -60,3 +65,26 @@ class WhatsappAnalyser:
       f"lasting **{(end_date-start_date).days}** days."
     )
     
+  def character_count(self):
+    pass
+
+  def count_day_of_week(self):
+    data = self.chat_df.set_index('date')
+    data = data['text']
+    activity_count = (
+      data
+      .resample('D')
+      .count()
+      .groupby(data.resample('D').count().index.dayofweek)
+      .sum()
+    )
+    activity_count.index = [
+      'Monday', 
+      'Tuesday', 
+      'Wednesday', 
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday'
+    ]
+    return activity_count

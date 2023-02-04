@@ -76,3 +76,38 @@ class VisualizeData(WhatsappAnalyser):
             width=800
         )
     return fig   
+
+  def plot_top_ten_active_days(self):
+    data = super().top_ten_most_active_days()
+    fig = px.bar(data)
+    return fig
+
+  def plot_emojis(self, top_ten=True):
+    if top_ten:
+      data = super().emoji_counts().sort_values().tail(10)
+      fig = px.bar(data, orientation='h')
+      fig.update_layout(
+        # height=len(data) * 50,
+        xaxis_title='Emoji Count',
+        yaxis_title='Emoji',
+        showlegend=False,
+      )
+    else:
+      data = super().emoji_counts().sort_values()
+      fig = px.bar(data, orientation='h')
+      fig.update_layout(
+        height=len(data) * 20,
+        xaxis_title='Emoji Count',
+        yaxis_title='Emoji',
+        showlegend=False,
+      )
+    return fig
+
+  def plot_day_of_week_activity(self):
+    data = super().count_day_of_week()
+    fig = px.bar(data)
+    fig.update_layout(
+      xaxis_title='Day',
+      yaxis_title='Message [Count]'
+    )
+    return fig
