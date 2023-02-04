@@ -2,22 +2,53 @@ from whatsapp_analyser import WhatsappAnalyser
 import calmap
 import pandas as pd
 import plotly.express as px
+from plotly_calplot import calplot
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+import datetime
 
 class VisualizeData(WhatsappAnalyser):
   
-  def plot_chat_calender(self):
+  def plot_chat_calender(self, year=False):
     daily_counts = super().count_daily()
     daily_counts.index = pd.DatetimeIndex(daily_counts.index)
-    fig, ax = calmap.calendarplot(daily_counts, cmap='Blues');
+    fig, ax = calmap.calendarplot(
+      daily_counts, 
+      cmap='Blues', 
+      fillcolor='grey', 
+      monthticks=3
+    );
     fig.set_size_inches(18, 8)
+    if year:
+      current_year = datetime.datetime.now().year
+      fig = plt.figure(figsize=(8, 4))
+      calmap.yearplot(
+        daily_counts,
+        cmap='Blues', 
+        fillcolor='grey', 
+        monthticks=3,
+        year=current_year
+      )
     return fig
 
   def plot_hour_chart(self):
     hour_counts = super().count_hourly()
-    return hour_counts
+    fig = px.bar(hour_counts)
+    fig.update_layout(
+        xaxis_title="Time",
+        yaxis_title="Message Count",
+        showlegend=False
+    )
+    return fig
 
-  def plot_word_cloud(max_words):
-    pass
+  def plot_word_cloud(self, max_words=100):
+    text_column = self.chat_df['text']
+    text_column = text_column[~text_column.str.contains('Media omitted')]
+    wordcloud = WordCloud(width=800, height=400, max_words=max_words).generate(' '.join(text_column))
+    fig = plt.figure(figsize=(16, 9))
+    plt.imshow(wordcloud, interpolation='bilinear')
+    plt.axis("off")
+    return fig
 
   def plot_chat_author_count(self, top_ten=True):
     if top_ten:

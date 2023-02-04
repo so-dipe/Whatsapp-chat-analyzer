@@ -102,8 +102,10 @@ def get_emoji_value_counts(text_column):
 def build_word_cloud(text_column, max_words):
     text_column = text_column[~text_column.str.contains('Media omitted')]
     wordcloud = WordCloud(width=800, height=400, max_words=max_words).generate(' '.join(text_column))
-
-    return wordcloud
+    fig, ax = plt.figure(figsize=(16, 9))
+    plt.imshow(wordcloud, interpolation='bilinear', ax=ax)
+    plt.axis("off")
+    return fig
 
 def authors_chat_count(df, top_ten=True):
     chat_count = df['author'].value_counts()
@@ -140,5 +142,16 @@ def plot_chat_count(chat_count):
         )
     return fig
 
+# def format_hour(hour):
+#         return f"{hour}{'am' if hour < 12 else 'pm'}"
+#         return f"{{hour} if hour < 12}"
+
 def format_hour(hour):
-        return f"{hour}:00{'am' if hour < 12 else 'pm'}"
+    if hour == 0:
+        return "12am"
+    elif hour < 12:
+        return f"{hour}am"
+    elif hour == 12:
+        return "12pm"
+    else:
+        return f"{hour - 12}pm"
