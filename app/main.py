@@ -39,10 +39,12 @@ if uploaded_file is not None:
             wa_analysis = WhatsappAnalyser(df)
             wa_visuals = VisualizeData(df)
 
-            tab1, tab2, tab3 = st.tabs(
+            tab1, tab2, tab3, tab4, tab5 = st.tabs(
                 [
                     'Overview', 
-                    'Participants', 
+                    'Participants',
+                    'Activity (Hours)', 
+                    'Activity (Days)',
                     'Word Cloud'
                 ]
             )
@@ -71,11 +73,42 @@ if uploaded_file is not None:
                     st.write(
                         'You can check the activity of all members in Participants'
                     )
+                
+                st.write('Activity (Hours)')
+                hour_count = wa_analysis.count_hourly() 
+                peak_hour = hour_count.idxmax()
+                max_texts = hour_count.max()
+                max_percent = wa_analysis.count_hourly(True).max().round(4) * 100
+                st.write(
+                    'During the course of this conversation, the most '
+                    f'active hour was {peak_hour} with {max_texts} texts sent. '
+                    f'This makes up {max_percent}% of all texts sent.'
+                )
+                hour_plot = wa_visuals.plot_hour_chart()
+                st.plotly_chart(hour_plot)
+
+                st.write('Activity (Days)')
+                days_cal_plot = wa_visuals.plot_chat_calender(True)
+                st.pyplot(days_cal_plot)
+                # st.plotly_chart(days_cal_plot)
+
+                st.write('Word Cloud')
+                word_cloud = wa_visuals.plot_word_cloud()
+                st.pyplot(word_cloud)
                     
                 
             with tab2:
                 fig = wa_visuals.plot_chat_author_count(False)
                 st.plotly_chart(fig)
+
+            with tab3: #Activity (hours)
+                pass
+
+            with tab4: #Activity (days)
+                pass
+
+            with tab5: #Word Cloud
+                pass
 
                     
                     

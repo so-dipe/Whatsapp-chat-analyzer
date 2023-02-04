@@ -11,8 +11,8 @@ class WhatsappAnalyser:
     date_counts = self.chat_df['date'].dt.date.value_counts()
     return date_counts.sort_index()
 
-  def count_hourly(self):
-    hour_counts = self.chat_df['time'].apply(lambda x: x.hour).value_counts()
+  def count_hourly(self, normalize=False):
+    hour_counts = self.chat_df['time'].apply(lambda x: x.hour).value_counts(normalize=normalize)
     hour_counts = hour_counts.sort_index()
     hour_counts.index = hour_counts.index.map(format_hour)
     return hour_counts
