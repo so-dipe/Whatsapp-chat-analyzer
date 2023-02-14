@@ -88,14 +88,16 @@ if uploaded_file is not None:
                 hour_plot = wa_visuals.plot_hour_chart()
                 st.plotly_chart(hour_plot)
 
-                st.write('Activity (Days)')
+                st.write('**Activity (Days)**')
+                st.write('Here\'s what the activity for this year looks like.')
                 days_cal_plot = wa_visuals.plot_chat_calender(True)
                 st.pyplot(days_cal_plot)
                 # st.plotly_chart(days_cal_plot)
 
-                st.write('Word Cloud')
+                st.write('Most Used Words')
                 word_cloud = wa_visuals.plot_word_cloud()
                 st.pyplot(word_cloud)
+                st.write(f'{wa_analysis.character_count()} words were sent over the span of the entire conversation')
                     
                 
             with tab2:
@@ -113,12 +115,12 @@ if uploaded_file is not None:
                 
 
             with tab5: #Text Analysis
-                st.write('Emoji Count')
+                st.write('Top Ten most used Emojis')
                 st.plotly_chart(wa_visuals.plot_emojis())
                 with st.expander('View Full Emoji List'):
                     st.plotly_chart(wa_visuals.plot_emojis(top_ten=False))
 
-                st.write('Word Cloud')
+                st.write('Most Used Words')
                 word_cloud = wa_visuals.plot_word_cloud()
                 st.pyplot(word_cloud)
 

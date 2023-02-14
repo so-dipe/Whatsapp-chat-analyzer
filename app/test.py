@@ -12,8 +12,21 @@ chat_df = chat_wrangler.chat_df
 
 wa_anal = WhatsappAnalyser(chat_df)
 
-va_data = VisualizeData(chat_df)
+# va_data = VisualizeData(chat_df)
 
-# print(wa_anal.count_by_authors())
 
-print(va_data.plot_chat_author_count())
+# print(va_data.plot_chat_author_count())
+
+print(wa_anal.character_count())
+
+import pandas as pd
+
+# create a sample dataframe with a text column
+# df = pd.DataFrame({'text_column': ['Hello world!', 'This is a sentence.']})
+
+# # use str.split to split each string into a list of words, and str.len to count the number of words
+# word_counts = df['text_column'].str.split().str.len().sum()
+
+# print(word_counts)
+
+print(wa_anal.chat_df.head())

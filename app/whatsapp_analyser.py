@@ -66,7 +66,8 @@ class WhatsappAnalyser:
     )
     
   def character_count(self):
-    pass
+    word_counts = self.chat_df['text'].str.split().str.len().sum()
+    return word_counts
 
   def count_day_of_week(self):
     data = self.chat_df.set_index('date')
