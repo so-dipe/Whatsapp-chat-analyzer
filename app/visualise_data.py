@@ -2,7 +2,7 @@ from whatsapp_analyser import WhatsappAnalyser
 import calmap
 import pandas as pd
 import plotly.express as px
-from plotly_calplot import calplot
+# from plotly_calplot import calplot
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 import datetime
