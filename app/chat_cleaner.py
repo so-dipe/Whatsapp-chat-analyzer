@@ -56,3 +56,11 @@ class WrangleChat:
             return 'Error: The file is not a WhatsApp chat file!'
         else:
             return None
+
+    def get_participants(self):
+        return self.chat_df['author'].unique()[1:].tolist()
+
+    def filter_participants(self, participants=[]):
+        if participants is not []:
+            self.chat_df = self.chat_df[self.chat_df["author"] == participants]
+        return self.chat_df.head()

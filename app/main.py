@@ -15,11 +15,11 @@ from visualise_data import VisualizeData
 st.title("WhatsApp Chat Analyzer")
 
 # Add some content to the app
-st.write("Welcome to the WhatsApp Chat app. This app visualizes your whatsapp chat, with in a group or with other individuals." 
-            "All the processing and analysis is done in the browser and your data is not sent to any other source"
+st.write("Welcome to the WhatsApp Chat Analyser. This app visualizes your whatsapp chat. It works on both group chats and individual dms. " 
+            "Just so you know, none of your conversation is sent to any source. It's between you and the browser you use or whoever you show."
 )
 
-uploaded_file = st.file_uploader("Uplaod your WhatsApp chat", type="txt")
+uploaded_file = st.file_uploader("Upload your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
     st.write("File Uploaded Successfully")
@@ -30,16 +30,19 @@ if uploaded_file is not None:
         st.write(df)
         # st.write(contents)
     else:
-
+        
         analysis_tab, data_tab = st.tabs(['Analysis', 'Data'])
+        
 
         with data_tab:
             st.dataframe(df)
             
         with analysis_tab:
             wa_analysis = WhatsappAnalyser(df)
-            wa_visuals = VisualizeData(df)
-
+            options = wa_analysis.get_participants()
+            participant = st.multiselect('Filter participants', options)
+            wa_analysis.filter_participants(participants=participant)
+            wa_visuals = VisualizeData(wa_analysis.chat_df)
             tab1, tab2, tab3, tab4, tab5 = st.tabs(
                 [
                     'Overview', 
@@ -56,7 +59,7 @@ if uploaded_file is not None:
                 )
                 num_authors = len(wa_analysis.count_by_authors())
                 st.write(
-                    f'The conversation was between **{num_authors}** individuals.'
+                    f'The conversation was between **{num_authors}** individual(s).'
                 )
 
                 if num_authors > 10:

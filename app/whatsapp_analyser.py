@@ -89,3 +89,11 @@ class WhatsappAnalyser:
       'Sunday'
     ]
     return activity_count
+
+  def get_participants(self):
+    return self.chat_df['author'].unique()[1:].tolist()
+
+  def filter_participants(self, participants=[]):
+    if participants != []:
+      self.chat_df = self.chat_df[self.chat_df["author"].isin(participants)]
+    return None
