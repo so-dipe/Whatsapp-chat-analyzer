@@ -19,12 +19,15 @@ st.write("Welcome to the WhatsApp Chat Analyser. This app visualizes your whatsa
             "Just so you know, none of your conversation is sent to any source. It's between you and the browser you use or whoever you show."
 )
 
+st.write('So, I noticed there is a different format from a file extracted on iOS or Android. Here is a temporary fix')
+device = st.selectbox('Choose your device type', options=['Android', 'iOS'])
+
 uploaded_file = st.file_uploader("Upload your WhatsApp chat", type="txt")
     
 if uploaded_file is not None:
     st.write("File Uploaded Successfully")
     contents = uploaded_file.read().decode("utf-8")
-    chat_wrangler = WrangleChat(contents)
+    chat_wrangler = WrangleChat(contents, device_type=device)
     df = chat_wrangler.chat_df
     if type(df) is str:
         st.write(df)
@@ -39,7 +42,7 @@ if uploaded_file is not None:
             
         with analysis_tab:
             wa_analysis = WhatsappAnalyser(df)
-            options = wa_analysis.get_participants()
+            options = chat_wrangler.get_participants()
             participant = st.multiselect('Filter participants', options)
             wa_analysis.filter_participants(participants=participant)
             wa_visuals = VisualizeData(wa_analysis.chat_df)
@@ -127,6 +130,3 @@ if uploaded_file is not None:
                 word_cloud = wa_visuals.plot_word_cloud()
                 st.pyplot(word_cloud)
 
-                    
-                    
-        
