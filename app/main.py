@@ -19,7 +19,7 @@ st.write("Welcome to the WhatsApp Chat Analyser. This app visualizes your whatsa
             "Just so you know, none of your conversation is sent to any source. It's between you and the browser you use or whoever you show."
 )
 
-st.write('So, I noticed there is a different format from a file extracted on iOS or Android. Here is a temporary fix')
+st.write('So, I noticed there is a different format from a file extracted on iOS to Android. Here is a temporary fix')
 device = st.selectbox('Choose your device type', options=['Android', 'iOS'])
 
 uploaded_file = st.file_uploader("Upload your WhatsApp chat", type="txt")
