@@ -9,8 +9,7 @@ from chat_cleaner import WrangleChat
 from whatsapp_analyser import WhatsappAnalyser
 from visualise_data import VisualizeData
 
-
-
+#this is just a joke
 # Add a title to the app
 st.title("WhatsApp Chat Analyzer")
 
