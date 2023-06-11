@@ -9,7 +9,12 @@ from chat_cleaner import WrangleChat
 from whatsapp_analyser import WhatsappAnalyser
 from visualise_data import VisualizeData
 
-#this is just a joke
+#helpers
+@st.cache_data
+def convert_df(df):
+    # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    return df.to_csv(index=False)
+
 # Add a title to the app
 st.title("WhatsApp Chat Analyzer")
 
@@ -38,6 +43,15 @@ if uploaded_file is not None:
 
         with data_tab:
             st.dataframe(df)
+            # st.download_button(label='Download Complete Data', data=df)
+            csv = convert_df(df)
+
+            st.download_button(
+                label="Download data as CSV",
+                data=csv,
+                file_name='chat data.csv',
+                mime='text/csv',
+            )
             
         with analysis_tab:
             wa_analysis = WhatsappAnalyser(df)
@@ -110,7 +124,7 @@ if uploaded_file is not None:
                 st.plotly_chart(fig)
 
             with tab3: #Activity (hours)
-                pass
+                st.plotly_chart(hour_plot)
 
             with tab4: #Activity (days)
                 st.write('')

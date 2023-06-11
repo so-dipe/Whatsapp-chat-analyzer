@@ -15,6 +15,8 @@ chat_df = chat_wrangler.chat_df
 
 wa_anal = WhatsappAnalyser(chat_df)
 
+print(remove_strings_from_text("image omitted"))
+
 participants = wa_anal.get_participants()
 print(participants)
 

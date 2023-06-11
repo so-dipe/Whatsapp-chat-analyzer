@@ -2,6 +2,12 @@
 from utils import format_hour, find_emojis
 import pandas as pd
 from wordcloud import WordCloud
+import nltk
+import string
+# from nltk.tokenize import word_tokenize, MWETokenizer
+
+nltk.download('punkt')
+nltk.download('stopwords')
 
 class WhatsappAnalyser:
   def __init__(self, chat_df):
@@ -41,7 +47,8 @@ class WhatsappAnalyser:
 
 
   def word_cloud(self, max_words=100):
-    text_column = self.chat_df['text']
+    text_column = self.chat_df['text'].apply(remove_punctuation_and_stopwords).apply(remove_strings_from_text)
+    # print(text_column.iloc[44:56])
     text_column = text_column[~text_column.str.contains('Media omitted')]
     wordcloud = WordCloud(width=800, height=400, max_words=max_words).generate(' '.join(text_column))
     return wordcloud
@@ -97,3 +104,27 @@ class WhatsappAnalyser:
     if participants != []:
       self.chat_df = self.chat_df[self.chat_df["author"].isin(participants)]
     return None
+
+def remove_punctuation_and_stopwords(text):
+  # Remove punctuation
+  text = text.translate(str.maketrans(string.punctuation, ' ' * len(string.punctuation)))    
+      
+  # Tokenize the text into words
+  words = nltk.word_tokenize(text)
+      
+  # Remove stopwords
+  stopwords = set(nltk.corpus.stopwords.words('english'))
+  words = [word for word in words if word.lower() not in stopwords]
+      
+  # Join the words back into a single string
+  cleaned_text = ' '.join(words)
+      
+  return cleaned_text
+
+def remove_strings_from_text(text):
+  strings_to_remove = ['sticker omitted', 'media omitted', 'video omitted', 'audio omitted', 'image omitted']
+  cleaned_text = text
+  for string in strings_to_remove:
+    cleaned_text = cleaned_text.replace(string, '')
+    
+  return cleaned_text
